@@ -1,0 +1,28 @@
+{% load thesaurus_tags %}
+
+{% get_tags as tags %}
+
+
+
+<div class="card pricing popular mb-5">
+  <div class="card-body">
+
+    <h4 class="text-center">Tags
+      <span class="ti-bookmark gradient-fill ti-lg ml-2"></span>
+    </h4>
+
+    <hr>
+
+    <ul class="list-unstyled">
+
+    {% for tag in tags %}
+
+        <a class="badge badge-pill badge-success" href="{% url 'thesaurus:tag_cards' tag.name %}">
+          {{ tag.name }}
+        </a>
+
+    {% endfor %}
+
+    </ul>
+  </div>
+</div>

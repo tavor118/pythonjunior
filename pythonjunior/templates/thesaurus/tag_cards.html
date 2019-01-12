@@ -1,0 +1,57 @@
+{% extends "thesaurus/thesaurus_base.html" %}
+
+
+{% block sidebar %}
+
+  <div class="card pricing popular mb-5">
+    <div class="card-body">
+
+      <h4 class="text-center"><span class="text-primary">Tag: </span>{{ tag }}</h4>
+
+      <hr>
+
+    </div>
+  </div>
+
+{% endblock %}
+
+
+
+{% block breadcrumb %}
+
+  <ol class="breadcrumb mb-4">
+
+    <li class="breadcrumb-item">
+      <a href="{% url 'thesaurus:home' %}">Thesaurus</a>
+    </li>
+
+    <li class="breadcrumb-item text-primary">
+      Tags
+    </li>
+
+    <li class="breadcrumb-item active">{{ tag }}</li>
+
+  </ol>
+
+{% endblock %}
+
+
+
+{% block main_content %}
+
+  <div class="row justify-content-center">
+
+    {% for card in cards %}
+      {% include "thesaurus/_card.html" %}
+    {% endfor %}
+
+
+  </div>
+
+{% endblock %}
+
+
+
+{% block tags %}
+  {% include "thesaurus/_tag_bar.html" %}
+{% endblock %}

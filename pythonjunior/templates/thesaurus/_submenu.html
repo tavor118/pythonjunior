@@ -1,0 +1,26 @@
+{% load thesaurus_tags %}
+
+
+
+<div class="client-logos my-5">
+  <div class="container text-center">
+
+      <nav class="navbar navbar-light bg-light justify-content-center">
+        <form class="form-inline">
+          <div class="my-4">
+            {% get_submenu as submenu %}
+            {% for category in  submenu %}
+              <a href="{% url 'thesaurus:sub_categories' category.name %}" class="btn btn-light align-middle">
+                <img class="main-category-icon align-middle" src="{{ category.icon.url }}" alt="icon">
+                <span class="align-middle">
+                  {{ category.name }}
+                  <span class="badge badge-secondary ml-2">{{ category.number_of_cards }}</span>
+                </span>
+              </a>
+            {% endfor %}
+          </div>
+        </form>
+      </nav>
+
+    </div>
+</div>

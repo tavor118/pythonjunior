@@ -1,0 +1,72 @@
+{% extends "thesaurus/thesaurus_base.html" %}
+
+
+{% block sidebar %}
+
+  <div class="card pricing popular mb-5">
+    <div class="card-body">
+
+      <h4 class="text-center">{{ main_category.name }}</h4>
+
+      <hr>
+
+      <ul class="list-unstyled">
+
+      {% for sub_category in main_category.sub_categories.all %}
+
+        <li>
+          <a href="{% url 'thesaurus:cards' main_category.name sub_category.name %}">
+            <p class="text-primary">{{ sub_category.name }}</p>
+          </a>
+        </li>
+
+      {% endfor %}
+
+      </ul>
+    </div>
+  </div>
+
+{% endblock %}
+
+
+
+{% block breadcrumb %}
+
+  <ol class="breadcrumb mb-4">
+
+    <li class="breadcrumb-item">
+      <a href="{% url 'thesaurus:home' %}">Thesaurus</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="{% url 'thesaurus:sub_categories' main_category.name %}">{{ main_category.name }}</a>
+    </li>
+    <li class="breadcrumb-item active">{{ sub_category.name }}</li>
+
+  </ol>
+
+{% endblock %}
+
+
+
+{% block main_content %}
+
+  <div class="row justify-content-center">
+
+    {% for card in cards %}
+
+      {% include "thesaurus/_card.html" %}
+
+    {% endfor %}
+
+
+  </div>
+
+{% endblock %}
+
+
+
+{% block tags %}
+
+  {% include "thesaurus/_tag_bar.html" %}
+
+{% endblock %}

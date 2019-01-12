@@ -1,0 +1,71 @@
+
+<div class="card features mb-4 {% if not card_details %} w-75 {% endif %} ">
+  <div class="card-body">
+    <div class="media">
+
+      <div class="media-body">
+        <a href="{{ card.url }}">
+          <h4 class="card-title">
+            <span class="ti-link gradient-fill ti-lg"></span>
+            {{ card.title }}
+          </h4>
+        </a>
+
+        <div class="media">
+          <div class="media-body">
+
+          {% if card_details %}
+
+            {% if card.description %}
+              <p class="card-text">
+                <span class="text-primary"><strong>Description: </strong></span>
+                {{ card.description }}
+              </p>
+            {% endif %}
+
+            {% if card.note %}
+              <p class="card-text">
+                <span class="text-primary"><strong>Notes: </strong></span>
+                {{ card.note }}
+              </p>
+            {% endif %}
+
+            {% else %}
+
+              <a class="btn btn-outline-primary my-3"
+                 href="{% url 'thesaurus:card' card.main_category card.sub_category.name card.slug %}"
+                 role="button"
+              >
+                Details
+              </a>
+
+            {% endif %}
+
+          {% with card.tags.all as card_tags %}
+            {% if card_tags %}
+              <p class="card-text">
+                <span class="text-primary"><strong>Tags: </strong></span>
+                {% for tag in card_tags %}
+                  <a class="badge badge-pill badge-success" href="{% url 'thesaurus:tag_cards' tag.name %}">
+                    {{ tag.name }}
+                  </a>
+                {% endfor %}
+              </p>
+            {% endif %}
+          {% endwith %}
+
+
+          </div>
+
+          <a href="{{ card.url }}">
+            <img class="py-card-img rounded img-thumbnail ml-3" src="{{ card.img.url }}" alt="Generic placeholder image">
+          </a>
+
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+

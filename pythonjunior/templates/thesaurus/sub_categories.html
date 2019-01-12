@@ -1,0 +1,80 @@
+{% extends "thesaurus/thesaurus_base.html" %}
+
+
+
+{% block sidebar %}
+
+<div class="card pricing popular mb-5">
+  <div class="card-body">
+
+    <h4 class="text-center">{{ main_category.name }}</h4>
+
+    <hr>
+
+    <ul class="list-unstyled">
+
+    {% for sub_category in sub_categories %}
+
+      <li>
+        <a href="{% url 'thesaurus:cards' main_category.name sub_category.name %}">
+          <p class="text-primary">{{ sub_category.name }}</p>
+        </a>
+      </li>
+
+    {% endfor %}
+
+    </ul>
+  </div>
+</div>
+
+{% endblock %}
+
+
+
+{% block breadcrumb %}
+  <ol class="breadcrumb mb-4">
+
+    <li class="breadcrumb-item"><a href="{% url 'thesaurus:home' %}">Thesaurus</a></li>
+    <li class="breadcrumb-item active">{{ main_category.name }}</li>
+
+  </ol>
+
+{% endblock %}
+
+
+
+{% block main_content %}
+  <div class="row justify-content-center">
+    <div class="col-8">
+
+        <ul class="list-unstyled ui-steps">
+        {% for sub_category in sub_categories %}
+
+            <li class="media">
+              <a href="{% url 'thesaurus:cards' main_category.name sub_category.name %}">
+                <div class="circle-icon mr-4">{{ forloop.counter }}</div>
+              </a>
+              <a href="{% url 'thesaurus:cards' main_category.name sub_category.name %}">
+                <div class="media-body mt-2">
+                  <h5>
+                    {{ sub_category.name }}
+                    <span class="badge badge-secondary ml-2">{{ sub_category.number_of_cards }}</span>
+                  </h5>
+                </div>
+              </a>
+            </li>
+
+        {% endfor %}
+        </ul>
+
+    </div>
+  </div>
+{% endblock %}
+
+
+
+{% block tags %}
+
+  {% include "thesaurus/_tag_bar.html" %}
+
+{% endblock %}
