@@ -5,7 +5,7 @@ from django.urls import reverse
 
 # Create your models here.
 class MainCategory(models.Model):
-    name = models.CharField(max_length=30, unique=True)
+    name = models.CharField(max_length=50, unique=True)
     priority = models.PositiveSmallIntegerField(default=1)
     icon = models.FileField(upload_to='category_icons/', default='category_icons/none/no-img.jpg')
     number_of_cards = models.PositiveIntegerField(default=0)
@@ -21,7 +21,7 @@ class MainCategory(models.Model):
 
 
 class SubCategory(models.Model):
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=50)
     priority = models.PositiveSmallIntegerField(default=1)
     main_category = models.ForeignKey(MainCategory, related_name='sub_categories', on_delete=models.CASCADE)
     number_of_cards = models.PositiveIntegerField(default=0)
@@ -37,7 +37,7 @@ class SubCategory(models.Model):
 
 
 class Tag(models.Model):
-    name = models.CharField(max_length=30, unique=True)
+    name = models.CharField(max_length=50, unique=True)
     priority = models.PositiveSmallIntegerField(default=1)
     number_of_cards = models.PositiveIntegerField(default=0)
 
@@ -53,11 +53,11 @@ class Tag(models.Model):
 
 class Card(models.Model):
     title = models.CharField(max_length=100)
-    slug = models.SlugField(allow_unicode=True, unique=True, editable=False)
+    slug = models.SlugField(max_length=100, allow_unicode=True, unique=True, editable=False)
     description = models.TextField(blank=True)
-    note = models.CharField(blank=True, max_length=200)
+    note = models.CharField(blank=True, max_length=255)
     url = models.URLField()
-    img = models.ImageField(upload_to='images/card_img/', default='images/card_img/default.ipg')
+    img = models.ImageField(upload_to='images/card_img/', default='images/card_img/default.jpg')
     rating = models.PositiveSmallIntegerField(default=1)
     reviews = models.PositiveSmallIntegerField(default=0)
     created_at = models.DateTimeField(auto_now=True)
