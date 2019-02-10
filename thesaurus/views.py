@@ -58,7 +58,7 @@ class TagCardListView(generic.ListView):
             models.Tag,
             name=self.kwargs.get('tag')
             )
-        queryset = self.tags.card_set.order_by('-rating', 'title')
+        queryset = self.tags.cards.order_by('-rating', 'title')
         return queryset
 
 
